@@ -1,0 +1,121 @@
+WITH FUNCTION:
+
+#include <bits/stdc++.h>
+using namespace std;
+#define MAX 1000000 //age theke define kore dilam we can take 1000000 ta nodes, ar amar main nite parbena etogula tai baire define korsi
+
+vector<int> graph[MAX]; //nodes gula rakhar jonno. whos connected to who 
+vector<bool> visited; //keeps track of whos visited who
+
+void bfs(int u){ //u hocche source node 
+    queue<int> q;// Create a queue for BFS. ke dhuktese ke ber hocche
+    q.push(u);//We put the starting node into the line
+    visited[u] = true;// Mark it as visited
+
+    while(!q.empty()){ //While there are still nodes in the queue (line), keep doing this
+        int v = q.front(); //Get the front node of the queue. Don’t remove it yet. as eta backtrack korte lagbe for the next levels
+        q.pop();// Remove it from the queue
+        cout << v << " "; //print it
+        // Traverse all neighbors of node v
+        for(int i: graph[v]){ //eta hocche to look at all the neighbors of node v. If v is house 3, we’re looking at all the houses connected to it through iterations of i
+           if(!visited[i]){ //neighbor visit kora na hole
+                q.push(i);//Enqueue neighbor
+                visited[i] = true;// Mark it visited
+                cout << i << " "; //print it
+           }
+        }
+    }
+}
+
+int main() {
+
+    cout << "Enter the number of nodes and edges: ";
+    int node, edge;
+    cin >> node >> edge;
+
+    cout << "Enter the graph: ";
+    for(int i=0; i<edge; i++){ //For every connection (edge)- Which two points are connected 
+        int node1, node2; //jegula connected ogular input neya holo
+        cin >> node1 >> node2;
+        graph[node1].push_back(node2);
+        graph[node2].push_back(node1);//Add both ways
+    }
+
+    visited.assign(node+1,false); /*visited vector e assign kortesi values for every node. shurute false diye rakhsi as unvisited. 
+        node+1 cause amar code 1-based. so 1 theke count hobe 0 theke na hoy
+        doesnt matter if 0 isnt isnt used. 1 based howay its safe to use node+1
+
+    0-based kemne bujhchi?
+    1. ja input nicchi node1 node2 graph[node1].push_back(node2) ekhane tai connect kortesi -1 na kore.
+    2. node+1 er karone. 0 based hole 0 to node hoto. but i said node+1 tar mane 1 theke hobe
+    3. nodes input neyar por decrement oo kintu korinai. node1--; node2--;*/
+    cout << "Enter the starting node: ";
+    int source;
+    cin >> source;
+
+    cout << "BFS path is: ";
+    bfs(source);
+
+    return 0;
+}
+
+
+W/O FUNCTION:
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+
+    cout << "Enter the number of nodes and edges: ";
+    int node, edge;
+    cin >> node >> edge;
+    
+    vector<int> graph[10000]; //nodes gula rakhar jonno. whos connected to who 
+    vector<bool> visited(node+1,false); //keeps track of whos visited who
+    
+    /*visited vector e assign kortesi values for every node. shurute false diye rakhsi as unvisited. 
+        node+1 cause amar code 1-based. so 1 theke count hobe 0 theke na hoy
+        doesnt matter if 0 isnt isnt used. 1 based howay its safe to use node+1
+
+    0-based kemne bujhchi?
+    1. ja input nicchi node1 node2 graph[node1].push_back(node2) ekhane tai connect kortesi -1 na kore.
+    2. node+1 er karone. 0 based hole 0 to node hoto. but i said node+1 tar mane 1 theke hobe
+    3. nodes input neyar por decrement oo kintu korinai. node1--; node2--;*/
+
+
+    cout << "Enter the graph: ";
+    for(int i=0; i<edge; i++){ //For every connection (edge)- Which two points are connected 
+        int node1, node2; //jegula connected ogular input neya holo
+        cin >> node1 >> node2;
+        graph[node1].push_back(node2);
+        graph[node2].push_back(node1);//Add both ways
+    }
+
+    cout << "Enter the starting node: ";
+    int source;
+    cin >> source;
+
+    cout << "BFS path is: ";
+
+    queue<int> q;// Create a queue for BFS. ke dhuktese ke ber hocche
+    q.push(source);//We put the starting node into the line
+    visited[source] = true;// Mark it as visited
+    cout << source << " ";
+
+    while(!q.empty()){ //While there are still nodes in the queue (line), keep doing this
+        int v = q.front(); //Get the front node of the queue. Don’t remove it yet. as eta backtrack korte lagbe for the next levels
+        q.pop();// Remove it from the queue
+        cout << v << " "; //print it
+        // Traverse all neighbors of node v
+        for(int i: graph[v]){ //eta hocche to look at all the neighbors of node v. If v is house 3, we’re looking at all the houses connected to it through iterations of i
+           if(!visited[i]){ //neighbor visit kora na hole
+                q.push(i);//Enqueue neighbor
+                visited[i] = true;// Mark it visited
+                cout << i << " "; //print it
+           }
+        }
+    }
+
+    return 0;
+}

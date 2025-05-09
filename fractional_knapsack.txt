@@ -1,0 +1,102 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int n;
+    cout << "Enter the number of objects: ";
+    cin >> n;
+    
+    // Declare arrays for weight, profit, and ratio of every single item
+    float weight[n], profit[n], ratio[n];
+    float x[n];  //koyta item nibo knapsack e (fractional value hote pare). float cause amader fraction nite hote pare
+    float capacity; //knapsack er capacity. fractional Knapsack e float capacity use kora uchit karon fractional item nite pari, and floating-point subtraction accurate result dey.
+
+    cout << "Enter the weights and profits of each object:\n";
+    for (int i = 0; i < n; i++) {
+        cin >> weight[i] >> profit[i];
+    }
+
+    cout << "Enter the capacity of the knapsack: "; //Knapsack e maximum weight koyta dhukbe
+    cin >> capacity;
+    
+    // Calculate the profit/weight ratio for each item
+    for (int i = 0; i < n; i++) {
+        ratio[i] = profit[i] / weight[i];} //karon fractional knapsack greedy method e ei ratio te depend kore
+        
+    float temp;
+    /*Ekhane descending order e sort kortesi ratio onujayi. ????? ????? ????? array ????. era ?? index ???, ??-? ???? item ?? representative.????:
+        profit[i] ? i-th item ?? profit
+        weight[i] ? i-th item ?? weight
+        ratio[i] ? i-th item ?? profit/weight
+        so under the if condition ith item mane oi item er profit weight ratio eki tai ekshathe shob shore jacche*/
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (ratio[i] < ratio[j]) {
+                temp = ratio[j];
+                ratio[j] = ratio[i];
+                ratio[i] = temp;
+                
+                //ekhane ratio swap howay weight ar profit ero swap hocche i, j wise, cause condition toh i, j er ratio er moddhe compare er. so ratio compare kore amra oi ith index er shathe jth er swap kortesi
+                temp = weight[j];
+                weight[j] = weight[i];
+                weight[i] = temp;
+                
+                temp = profit[j];
+                profit[j] = profit[i];
+                profit[i] = temp;
+            }
+        }
+    }
+    // Initialize variables
+    float totalp = 0;  //ekhon porjonto total profit. ar ekhon 0 cause start hoynai ekhono knapsack. so initially profit 0
+    float u = capacity;  // Remaining capacity of the knapsack
+    
+    // Initialize the result vector with 0 (indicating nothing is taken initially)
+    for (int i = 0; i < n; i++) {
+        x[i] = 0.0;
+    }
+    //check if the weight is zero before calculating the ratio. If it is, we can either assign a very low ratio so it’s not picked, or we can skip the item altogether. This prevents division by zero, crashing and keeps the program safe
+    for (int i = 0; i < n; i++) {
+        if (weight[i] == 0) {
+            ratio[i] = 0;  // Or just set to 0 so it's not picked
+        } else {
+            ratio[i] = profit[i] / weight[i];
+        }
+    }
+
+    // Greedily select items based on the sorted profit/weight ratio
+    for (int i = 0; i < n; i++) {
+        if (weight[i] <= u) {  // If the item can fit into the remaining capacity
+            x[i] = 1.0;  // Take the entire item
+            totalp += profit[i];  // Add the profit of the entire item. ager profit tp er shathe new profit[i] add kore dibo
+            u -= weight[i];  // Decrease the remaining capacity. capacity theke weight minus hobe each step e
+        }
+        else {  // If the item cannot fit entirely, take the fractional part.  joto tuku bag e dhuke toto tuku nibo
+            x[i] = u / weight[i]; //knapsack= remaining capacity/new item er weight
+            totalp += x[i] * profit[i]; //profit change hocche. total= total+ (knapsack x[i]*new profit[i])
+           u= u- (x[i]*weight[i]); 
+            /*capacity input theke dhore nicchi- user ja de.
+            u holo bag er current empty space, mane 10 capacity or ase ekhono. item dhalbo ar capacity kombe
+            initially u = 10, mane bag puro khali.
+            
+            u=0 dile eikhane:
+                dhori u = 2, weight[i] = 5
+                tumi fraction niyecho: x[i] = 2 / 5 = 0.4
+                profit add hoye gese: totalp += 0.4 * profit[i]
+                ? Ekhon bag full, but u still 2 ache if we don’t reset it!
+            ?? That's why we must manually set u = 0 here to indicate: “Bag ekhane full hoye gese. Ar kichu nibo na. eta simpler and safer in greedy logic, since after that no item should be taken anyway.”
+            */
+        }
+        if (u == 0) break;  //If there's no remaining capacity, stop further selection
+    }
+
+    // Print the result vector (fraction of each item taken)
+    cout << "The result vector is: ";
+    for (int i = 0; i < n; i++) {
+        cout << x[i] << " ";
+    }
+    // Print the maximum profit
+    cout << "\nMaximum profit is: " << totalp << endl;
+
+    return 0;
+}
