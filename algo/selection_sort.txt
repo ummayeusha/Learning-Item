@@ -1,0 +1,41 @@
+Without optimizing (Optimize korar dorkar nai cause just swap kome but compare thik ee shob kora lage. So complexity still O(n2)): 
+
+#include <bits/stdc++.h>
+using namespace std;
+
+void selectionSort(int arr[], int n){
+    for (int i=0; i<n-1; i++){
+        int min= i; //first ta k e minimum dhore agate hobe. ar value na diye index disi taile comparison e easy hobe as value diye amra haray felbo kothay minimum ba kemne agacche sort ta. track kora tough hoye jabe
+        for (int j=i+1; j<n; j++){ //first take porer tar shathe jehetu compare kora lagbe i+1 ke j teh rekhe ebar 1st/min er shathe comparison cholte thakbe
+            if (arr[j]<arr[min]){
+                min= j; //j er value min er cheye choto hole min er index update hobe erpor abar comparison cholbe till stopping condition's met
+            }
+        }
+        
+        if (i != min){ //arithmetic approach use korle i index jeno min index er shoman na hoy omne agaye swap korte hobe. If i == min, that means the smallest element is already at the correct position (the same position as i), so there is no need to swap it.
+            arr[i]= arr[i]+arr[min];
+            arr[min]= arr[i]-arr[min];
+            arr[i]= arr[i]-arr[min];
+        }
+    }
+}
+
+int main (){
+    
+    cout << "enter size: ";
+    int n;
+    cin >> n;
+    
+    cout << "enter elements: ";
+    int arr[n];
+    for (int i=0; i<n; i++)
+        cin >> arr[i];
+    
+    selectionSort(arr, n);
+    
+    cout << "sorted: ";
+    for (int i=0; i<n; i++)
+        cout << arr[i] << " ";
+        
+    return 0;
+}
