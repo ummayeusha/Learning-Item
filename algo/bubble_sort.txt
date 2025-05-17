@@ -1,0 +1,74 @@
+Without optimization: 
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main (){
+    
+    cout << "enter size: ";
+    int n;
+    cin >> n;
+    
+    cout << "enter elements: ";
+    int arr[n];
+    for (int i=0; i<n; i++)
+        cin >> arr[i];
+    
+    for (int i=0; i<n-1; i++){ //iteration
+
+        for (int j=0; j<n-1-i; j++){ /*comparison, j<n-1-i hocche proti i iteration e ekta ekta item sort hoye jacche tai oke baad diye kortesi. N-1-i ja ashbe totgula comparison hobe/ index oto porjonto 2nd loop run korbe*/
+
+            if (arr[j+1] < arr[j]){ //desc forte hole ethane < ta just > kore dile hobe
+                int temp = arr[j]; //swap
+                arr[j]= arr[j+1];
+                arr[j+1]= temp;
+            }
+        }
+    }
+    
+    cout << "sorted: ";
+    for (int i=0; i<n; i++)
+        cout << arr[i] << " ";
+        
+    return 0;
+}
+
+
+
+After optimizing:
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main (){
+    
+    cout << "enter size: ";
+    int n;
+    cin >> n;
+    
+    cout << "enter elements: ";
+    int arr[n];
+    for (int i=0; i<n; i++)
+        cin >> arr[i];
+    
+    for (int i=0; i<n-1; i++){
+
+        int flag= 0; /*to check je swap hoise naki kono step/pass e, taile ar nicher part execute korbena, direct break kore dibe*/
+
+        for (int j=0; j<n-1-i; j++){
+            if (arr[j+1] < arr[j]){
+                int temp = arr[j];
+                arr[j]= arr[j+1];
+                arr[j+1]= temp;
+	   flag= 1; //swap happened
+            }
+        }
+        if (flag==0) break; 
+    }
+    
+    cout << "sorted: ";
+    for (int i=0; i<n; i++)
+        cout << arr[i] << " ";
+        
+    return 0;
+}
