@@ -26,4 +26,7 @@ main() {
 
   var valueList = person.values.toList();
   print(valueList);
+
+  person.clear();
+  print(person);
 }
