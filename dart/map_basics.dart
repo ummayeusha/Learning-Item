@@ -27,6 +27,21 @@ main() {
   var valueList = person.values.toList();
   print(valueList);
 
+  print(person.runtimeType);
+
+  /*var person2= {
+    'name': 'alal',
+    'age': '26',
+    'amount'= 45.78,
+    'isM'= false;
+    20:54,
+  };*/
+
+  Map<String, String> person3 = {};
+
+  //print(person2.runtimeType);
+  print(person3.runtimeType);
+
   person.clear();
   print(person);
 }
