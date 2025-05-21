@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+//Recursive function
+void ToH(int n, char BEG, char AUX, char END) {
+
+    //Base case: If there's only one disk, move it directly
+    if(n == 1)
+        cout << BEG << " to " << END << endl;
+    else
+    {
+        //Step 1: Move n-1 disks from BEG to AUX using END as helper
+        ToH(n - 1, BEG, END, AUX);
+
+        //Step 2: Move the nth (largest) disk directly from BEG to END
+        cout << BEG << " to " << END << endl;
+
+        //Step 3: Move the n-1 disks from AUX to END using BEG as helper
+        ToH(n - 1, AUX, BEG, END);
+    }
+}
+
+int main(){ 
+
+    cout << "Enter the number of disks: ";
+    int n;
+    cin >> n;
+
+    /*Call the ToH function where:
+    n = number of disks
+    'A' = beginning rod
+    'B' = auxiliary rod
+    'C' = end rod*/
+
+    ToH(n, 'A', 'B', 'C');
+
+    return 0;
+}
