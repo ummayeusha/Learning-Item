@@ -1,20 +1,12 @@
-// Importing the dart:io library to use stdin (for input)
 import 'dart:io';
 
 main() {
-  // Declaring a variable called amount and assigning it value 500
   var amount = 500;
-
-  // Declaring famount and assigning 300
   var famount = 300;
-
-  // A string variable storing friend's name
   var friend = 'xyxy';
 
-  // Printing the amount value
   print("amount is: $amount");
 
-  // Checking conditions using if-else chain
   if (amount < 100) {
     print("Car"); // If amount is less than 100
   } else if (amount > 300) {
@@ -24,14 +16,12 @@ main() {
       "heli",
     ); // If amount is less than 400 (but already checked >300 above)
   } else {
-    print("none"); // If none of the above conditions are true
+    print("none");
   }
 
-  // Declaring another variable amount2 and printing it
   var amount2 = 400;
   print("amount is: $amount2");
 
-  // Checking amount2 value with <= comparisons
   if (amount2 <= 100) {
     print("Car");
   } else if (amount2 <= 300) {
@@ -84,9 +74,9 @@ main() {
   if (userName == 'eueu' && passWord == '456') {
     print("login"); // Correct username and password
   } else if (userName == 'eueu' && passWord != '456') {
-    print("not correct"); // Correct username, wrong password
+    print("pass not correct"); // Correct username, wrong password
   } else if (userName != 'eueu' && passWord == '456') {
-    print("correct"); // Wrong username, correct password
+    print("name not correct"); // Wrong username, correct password
   } else {
     print("try again"); // Both username and password are wrong
   }
