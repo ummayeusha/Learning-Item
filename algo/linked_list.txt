@@ -1,0 +1,46 @@
+#include <iostream>
+using namespace std; 
+
+// Define a structure for a node in the linked list
+struct node {
+    int data; // To store the data value
+    node *next; // Pointer to the next node
+};
+
+int main() {
+    cout << "Enter the number of nodes : ";
+    int n;
+    cin >> n;
+
+    node *head = NULL, *temp = NULL;
+
+    // Loop to create 'n' nodes
+    for (int i = 0; i < n; i++) {
+        node *newNode = new node; // Allocate memory for a new node
+        cout << "Enter the data for node " << i + 1 << " : "; // Prompt for node data
+        int d;
+        cin >> d; 
+        newNode->data = d; // Assign data to the node
+        newNode->next = NULL; // Initialize the next pointer of the new node
+
+        if (head == NULL)
+            head = newNode; // If list is empty, new node becomes the head
+        else
+            temp->next = newNode; // Link the previous node to the new node
+
+        temp = newNode; // Move temp to point to the new last node
+    }
+
+    temp = head; // Reset temp to the beginning of the list
+
+    cout << "The linked list is : " << endl;
+
+    // Traverse and print the linked list
+    while (temp != NULL) {
+        cout << temp->data << "-> "; // Print current node's data
+        temp = temp->next; // Move to the next node
+    }
+    cout << "NULL" << endl; // End of the list
+
+    return 0;
+}
