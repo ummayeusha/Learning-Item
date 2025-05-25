@@ -11,8 +11,12 @@ main() {
   dynamic test2 = 50; //run time declare kore de
   test2 = 'hihi';
 
+  String num = "23";
+  int parsenum = int.parse(num);
+  print(parsenum);
+
   print('Name: ' + name);
-  print('Name: $name \nAge: $age');
+  print('Name: $name Age: $age');
   print('Var: ' + test);
   print('Dynamic: ' + test2.toString());
   print(test2.runtimeType);
