@@ -1,8 +1,10 @@
+// ignore_for_file: unused_local_variable, unnecessary_type_check
+
 main() {
   String name = 'Rasha';
   int age = 28;
   //double pi = 3.1416;
-  bool ans = true;
+  var ans = true;
 
   name = 'Rasha';
   age = 15;

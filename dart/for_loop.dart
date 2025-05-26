@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 main() {
   for (int i = 1; i <= 10; i++) {
     print("hi");
@@ -24,7 +26,7 @@ main() {
   }
 
   // Loop through the list. But here it's printing the entire list each time (not a single number)
-  for (var number in num) {
+  for (String number in num) {
     print("$num 100 mb here"); // This will print the full list every time
   }
 
