@@ -1,0 +1,33 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+
+    int n, LB, UB, LA[100];
+
+    cout << "Enter the number of array elements: ";
+    cin >> n;
+
+    cout << "Enter the array elements: ";
+    for (int i = 0; i < n; i++) {
+        cin >> LA[i];
+    }
+
+    // Set the lower bound (LB) and upper bound (UB) for the array
+    LB = 0;
+    UB = n - 1;
+
+    // Add 2 to every element of the array using a while loop
+    int k = LB;
+    while (k <= UB) {
+        LA[k] = LA[k] + 2;
+        k++;
+    }
+
+    cout << "Updated array: ";
+    for (k = 0; k < n; k++) {
+        cout << LA[k] << " ";
+    }
+
+    return 0;
+}
