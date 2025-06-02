@@ -9,10 +9,6 @@ main() {
   int age2 = 33;
   String address2 = "ctg";
 
-  String name3 = "frfr";
-  int age3 = 44;
-  String address3 = "bar";
-
   Student s = Student();
   s.studName = "sss";
   s.age = 30;
