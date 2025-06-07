@@ -1,3 +1,6 @@
 main() {
   print("hi");
+
+  //syntex
+  
 }
