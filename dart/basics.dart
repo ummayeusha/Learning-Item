@@ -1,6 +1,0 @@
-main() {
-  print("hi");
-
-  //syntex
-  
-}
